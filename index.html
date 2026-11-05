@@ -1,0 +1,394 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Aliah's 18th Birthday ♡ - From Gab</title>
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      background: #0f0f0f;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+      font-family: 'Courier New', monospace;
+    }
+    .phone {
+      width: 360px; height: 680px;
+      background: #c3c3b4;
+      border: 6px solid #a0a08a;
+      border-radius: 22px;
+      padding: 12px;
+      position: relative;
+      box-shadow: 0 0 0 8px #2b2b2b, 0 20px 40px #000;
+      overflow: hidden;
+    }
+    .nokia {
+      text-align: center;
+      font-family: Arial Black;
+      font-size: 18px;
+      color: #333;
+      letter-spacing: 6px;
+      margin-bottom: 8px;
+    }
+    .screen {
+      width: 100%; height: 52%;
+      background: #aebf8a;
+      border: 4px solid #222;
+      border-radius: 4px;
+      overflow: hidden;
+      position: relative;
+    }
+    .scanlines {
+      position: absolute;
+      width: 100%; height: 100%;
+      background: repeating-linear-gradient(transparent, transparent 3px, #98ad7a 3px, #98ad7a 4px);
+      opacity: 0.3;
+      pointer-events: none;
+      z-index: 10;
+    }
+    #content {
+      padding: 10px;
+      height: 100%;
+      overflow-y: auto;
+      position: relative;
+      z-index: 2;
+    }
+    .app-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 10px;
+      margin-top: 55px;
+    }
+    .app {
+      height: 75px;
+      background: #d9c7a0;
+      border: 2px solid #1a2a0a;
+      border-radius: 6px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      box-shadow: 3px 3px 0 #7a8a5a;
+    }
+    .app:active { transform: translate(2px, 2px); }
+    .app span:first-child { font-size: 22px; }
+    .app span:last-child { font-size: 10px; font-weight: bold; margin-top: 4px; }
+    .back { font-size: 11px; font-weight: bold; cursor: pointer; margin-bottom: 6px; display: inline-block; }
+    .note { font-size: 11px; line-height: 1.4; white-space: pre-wrap; }
+    .calendar { display: grid; grid-template-columns: repeat(7, 1fr); gap: 2px; margin-top: 8px; }
+    .day { font-size: 10px; text-align: center; padding: 6px 2px; border-radius: 3px; }
+    .day.marked { background: #ff6f8a; color: white; font-weight: bold; border: 2px solid #a00; }
+    .cake-area { position: relative; height: 260px; cursor: pointer; }
+    .layer { position: absolute; left: 50%; transform: translateX(-50%); border: 2px solid #1a2a0a; border-radius: 2px; }
+    .candle { position: absolute; width: 6px; height: 18px; background: #96dcdc; border: 1px solid #1a2a0a; }
+    .flame {
+      position: absolute; width: 8px; height: 8px;
+      background: #ffeb50; border-radius: 50%;
+      border: 1px solid #1a2a0a; top: -8px; left: -1px;
+      animation: flicker 0.6s infinite alternate;
+    }
+    @keyframes flicker { from { transform: scale(1); } to { transform: scale(1.2); } }
+    .keypad { margin-top: 15px; }
+    .power {
+      width: 160px; margin: 0 auto 10px;
+      background: #333; color: white; text-align: center;
+      padding: 10px; border-radius: 4px;
+      font-size: 11px; font-weight: bold; cursor: pointer; border: 2px solid #111;
+    }
+    .keys { display: grid; grid-template-columns: repeat(3, 1fr); gap: 6px; }
+    .key {
+      height: 52px; background: #555; border: 2px solid #222; border-radius: 6px;
+      display: flex; align-items: center; justify-content: center;
+      color: white; font-weight: bold; font-size: 18px; cursor: pointer;
+      box-shadow: 0 3px 0 #1a1a1a;
+    }
+    .key:active { transform: translateY(2px); }
+    .balloon-container { position: absolute; top: 0; left: 0; width: 100%; height: 100%; overflow: hidden; pointer-events: none; z-index: 1; }
+    .balloon-wrap { position: absolute; bottom: -80px; animation: floatUp linear infinite; }
+    .balloon { width: 32px; height: 40px; border-radius: 50% 50% 50% 50% / 60% 60% 40% 40%; border: 2px solid #1a2a0a; position: relative; }
+    .balloon::after {
+      content: ''; position: absolute; bottom: -6px; left: 50%; transform: translateX(-50%);
+      width: 0; height: 0; border-left: 5px solid transparent; border-right: 5px solid transparent; border-top: 7px solid #1a2a0a;
+    }
+    .wavy-string { width: 20px; height: 70px; margin: 0 auto; margin-top: 4px; }
+    .wavy-string svg { width: 100%; height: 100%; overflow: visible; }
+    @keyframes floatUp {
+      0% { transform: translateY(0) translateX(0); }
+      25% { transform: translateY(-100px) translateX(8px); }
+      50% { transform: translateY(-200px) translateX(-8px); }
+      75% { transform: translateY(-300px) translateX(6px); }
+      100% { transform: translateY(-420px) translateX(0); opacity: 0; }
+    }
+    .pass-box {
+      width: 40px; height: 42px;
+      border: 2px solid #1a2a0a; background: #d9e7b5;
+      display: flex; align-items: center; justify-content: center;
+      font-weight: bold; font-size: 20px; color: #1a2a0a;
+    }
+    .shake { animation: shake 0.3s; }
+    @keyframes shake {
+      0%, 100% { transform: translateX(0); }
+      25% { transform: translateX(-5px); }
+      75% { transform: translateX(5px); }
+    }
+  </style>
+</head>
+<body>
+  <div class="phone">
+    <div class="nokia">GAB</div>
+    <div class="screen">
+      <div class="scanlines"></div>
+      <div class="balloon-container" id="balloons"></div>
+      <div id="content"></div>
+    </div>
+    <div class="keypad">
+      <div class="power" onclick="handlePower()">POWER</div>
+      <div class="keys">
+        <div class="key" onclick="pressKey('1')">1</div>
+        <div class="key" onclick="pressKey('2')">2</div>
+        <div class="key" onclick="pressKey('3')">3</div>
+        <div class="key" onclick="pressKey('4')">4</div>
+        <div class="key" onclick="pressKey('5')">5</div>
+        <div class="key" onclick="pressKey('6')">6</div>
+        <div class="key" onclick="pressKey('7')">7</div>
+        <div class="key" onclick="pressKey('8')">8</div>
+        <div class="key" onclick="pressKey('9')">9</div>
+        <div class="key" onclick="pressKey('*')">*</div>
+        <div class="key" onclick="pressKey('0')">0</div>
+        <div class="key" onclick="pressKey('#')">#</div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    const content = document.getElementById('content');
+    const balloonBox = document.getElementById('balloons');
+    const NOTES = `Happy Birthday, Aliah! sana matupad mo lahat ng dreams mo at sana masaya ka. Always remember that I'm still here whenever u need me. You deserve all the love and kindness in this world. Thank you for bringing light into my life. I'll always be your no.1 supporter. HBD, MBTC, IMY. - gab`;
+    const PASSCODE = "0119";
+    let state = "OFF";
+    let cakeStep = 0;
+    let entered = "";
+
+    function createBalloons() {
+      balloonBox.innerHTML = "";
+      const colors = ["#ff6f8a","#ffb6c1","#ff8fab","#ffbe0b","#06d6a0","#64b4ff","#ffd59a","#a0d9b0","#c7a0d9","#ff8cc8","#ff4d6d","#ff7b00"];
+      for (let i = 0; i < 22; i++) {
+        const wrap = document.createElement('div');
+        wrap.className = 'balloon-wrap';
+        wrap.style.left = (Math.random() * 80 + 5) + '%';
+        wrap.style.animationDuration = (4 + Math.random() * 3) + 's';
+        wrap.style.animationDelay = (Math.random() * 3) + 's';
+        const b = document.createElement('div');
+        b.className = 'balloon';
+        b.style.background = colors[i % colors.length];
+        const wavy = document.createElement('div');
+        wavy.className = 'wavy-string';
+        wavy.innerHTML = `<svg viewBox="0 0 20 70"><path d="M10 0 Q 2 10 10 20 Q 18 30 10 40 Q 2 50 10 60 Q 18 65 10 70" fill="none" stroke="#1a2a0a" stroke-width="1.5" stroke-linecap="round"/></svg>`;
+        wrap.appendChild(b);
+        wrap.appendChild(wavy);
+        balloonBox.appendChild(wrap);
+      }
+    }
+
+    function clear() { content.innerHTML = ""; }
+
+    function centerText(t) {
+      clear();
+      content.innerHTML = `<div style="display:flex;height:100%;align-items:center;justify-content:center;text-align:center;font-weight:bold;font-size:18px">${t}</div>`;
+    }
+
+    function handlePower() {
+      if (state === "OFF") {
+        showPasscode();
+      }
+    }
+
+    function showPasscode() {
+      state = "PASSCODE";
+      entered = "";
+      balloonBox.innerHTML = "";
+      clear();
+      content.innerHTML = `
+        <div style="display:flex;flex-direction:column;align-items:center;justify-content:center;height:100%;text-align:center">
+          <div style="font-weight:bold;font-size:12px;letter-spacing:1px">ENTER PASSCODE</div>
+          <div style="display:flex;gap:8px;margin-top:20px" id="boxes">
+            <div class="pass-box" id="b0"></div>
+            <div class="pass-box" id="b1"></div>
+            <div class="pass-box" id="b2"></div>
+            <div class="pass-box" id="b3"></div>
+          </div>
+        </div>`;
+    }
+
+    function updateBoxes() {
+      for (let i = 0; i < 4; i++) {
+        const box = document.getElementById('b' + i);
+        if (box) {
+          box.textContent = i < entered.length ? entered[i] : "";
+        }
+      }
+    }
+
+    function pressKey(k) {
+      if (state === "OFF") {
+        return; // POWER lang ang pwede magbukas
+      }
+      if (state === "PASSCODE") {
+        if (k >= '0' && k <= '9') {
+          if (entered.length < 4) {
+            entered += k;
+            updateBoxes();
+          }
+          if (entered.length === 4) {
+            setTimeout(() => {
+              if (entered === PASSCODE) {
+                state = "LOADING";
+                loading(0);
+              } else {
+                const boxes = document.getElementById('boxes');
+                if (boxes) {
+                  boxes.classList.add('shake');
+                  setTimeout(() => boxes.classList.remove('shake'), 300);
+                }
+                entered = "";
+                updateBoxes();
+              }
+            }, 250);
+          }
+        } else if (k === '#') {
+          entered = entered.slice(0, -1);
+          updateBoxes();
+        } else if (k === '*') {
+          entered = "";
+          updateBoxes();
+        }
+        return;
+      }
+    }
+
+    function loading(d) {
+      if (d > 3) { showMenu(); return; }
+      clear();
+      content.innerHTML = `
+        <div style="text-align:center;margin-top:50px">
+          <div style="font-size:22px;font-weight:bold">Loading${".".repeat(d)}</div>
+          <div style="width:80%;height:12px;border:2px solid #1a2a0a;margin:15px auto">
+            <div style="height:100%;width:${(d / 3) * 100}%;background:#1a2a0a"></div>
+          </div>
+        </div>`;
+      setTimeout(() => loading(d + 1), 400);
+    }
+
+    function showMenu() {
+      state = "MENU";
+      balloonBox.innerHTML = "";
+      clear();
+      content.innerHTML = `
+        <div style="text-align:center;font-size:11px;font-weight:bold;margin-bottom:6px">Select App</div>
+        <div class="app-grid">
+          <div class="app" style="background:#d9c7a0" onclick="openApp('NOTES')"><span>📓</span><span>NOTES</span></div>
+          <div class="app" style="background:#c7a0d9" onclick="openApp('MUSIC')"><span>🎵</span><span>MUSIC</span></div>
+          <div class="app" style="background:#a0d9b0" onclick="openApp('CALENDAR')"><span>📅</span><span>CALENDAR</span></div>
+          <div class="app" style="background:#ffd59a" onclick="openApp('CAKE')"><span>🎂</span><span>CAKE</span></div>
+        </div>`;
+    }
+
+    function openApp(name) {
+      clear();
+      content.innerHTML = `<div class="back" onclick="showMenu()">< MENU</div>`;
+      if (name === "NOTES") {
+        content.innerHTML += `<div style="text-align:center;font-weight:bold;font-size:12px;margin:6px 0">NOTES</div><div class="note">${NOTES}</div>`;
+      }
+      if (name === "MUSIC") {
+        content.innerHTML += `
+          <div style="text-align:center;margin-top:6px">
+            <div style="font-weight:bold;font-size:12px">listen to this music</div>
+            <div style="margin-top:10px;font-weight:bold;font-size:12px">♪ Last Night on Earth ♪</div>
+            <div style="font-size:10px;margin-top:2px">- green day -</div>
+            <div style="margin-top:12px">
+              <iframe width="100%" height="120" src="https://www.youtube.com/embed/6x5vSLKfbXo?si=uVj7eAEI4FBDRWUI" frameborder="0" allowfullscreen style="border:2px solid #1a2a0a;border-radius:6px"></iframe>
+            </div>
+            <div style="margin-top:8px;font-size:9px">enjoy listening</div>
+            <div style="margin-top:6px;font-size:9px;font-weight:bold">Press the play button</div>
+          </div>`;
+      }
+      if (name === "CALENDAR") {
+        let html = `<div style="text-align:center;font-weight:bold;font-size:12px">NOVEMBER 2026</div><div style="text-align:center;font-size:9px;font-weight:bold;margin-top:4px">Sun Mon Tue Wed Thu Fri Sat</div><div class="calendar">`;
+        for (let d = 1; d <= 30; d++) {
+          let cls = d === 19 ? "day marked" : "day";
+          html += `<div class="${cls}">${d}</div>`;
+        }
+        html += `</div><div style="text-align:center;margin-top:10px;font-size:10px;font-weight:bold;color:#a00">♥ NOVEMBER 19 - SPECIAL DAY! ♥</div>`;
+        content.innerHTML += html;
+      }
+      if (name === "CAKE") {
+        cakeStep = 0;
+        content.innerHTML += `
+          <div style="text-align:center;font-size:12px;font-weight:bold;color:#1a2a0a;margin-bottom:8px;letter-spacing:2px">CLICK</div>
+          <div class="cake-area" id="cakeArea" onclick="dropCake()"></div>`;
+        drawCake();
+      }
+    }
+
+    function drawCake() {
+      const area = document.getElementById('cakeArea');
+      if (!area) return;
+      area.innerHTML = "";
+      const widths = [160, 120, 80];
+      const heights = [45, 38, 32];
+      const colors = ["#ffb6c1", "#ff8da1", "#ff6f8a"];
+      const targets = [160, 115, 75];
+      for (let i = 0; i < 3; i++) {
+        if (cakeStep > i) {
+          const div = document.createElement('div');
+          div.className = 'layer';
+          div.style.width = widths[i] + 'px';
+          div.style.height = heights[i] + 'px';
+          div.style.background = colors[i];
+          div.style.top = targets[i] + 'px';
+          area.appendChild(div);
+        }
+      }
+      if (cakeStep === 3) {
+        [-20, 0, 20].forEach(offset => {
+          const c = document.createElement('div');
+          c.className = 'candle';
+          c.style.left = `calc(50% + ${offset}px)`;
+          c.style.top = '58px';
+          const f = document.createElement('div');
+          f.className = 'flame';
+          c.appendChild(f);
+          area.appendChild(c);
+        });
+      }
+    }
+
+    function dropCake() {
+      if (cakeStep < 3) {
+        cakeStep++;
+        drawCake();
+        if (cakeStep === 3) {
+          setTimeout(winGame, 500);
+        }
+      }
+    }
+
+    function winGame() {
+      clear();
+      createBalloons();
+      content.innerHTML = `
+        <div class="back" onclick="showMenu()">< MENU</div>
+        <div style="display:flex;height:75%;align-items:center;justify-content:center;text-align:center;flex-direction:column;position:relative;z-index:2">
+          <div style="font-weight:bold;font-size:16px;color:#1a2a0a">HAPPY BIRTHDAY</div>
+          <div style="font-weight:bold;font-size:32px;color:#ff2f6e;margin-top:8px;letter-spacing:1px">ALIAH!</div>
+          <div style="margin-top:10px;font-size:14px;color:#ff2f6e">♡ ♡ ♡</div>
+        </div>`;
+    }
+
+    centerText("CLICK POWER");
+  </script>
+</body>
+  </html>
